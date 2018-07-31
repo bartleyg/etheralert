@@ -1,5 +1,5 @@
 from __future__ import absolute_import, unicode_literals
-import json #import ujson as json
+import json
 import requests
 import time
 import sys
@@ -9,7 +9,7 @@ from app.models import Alert
 
 from web3 import Web3
 
-from ethereum_sms.settings import ETHERSCAN_API_KEY
+from etheralert.settings import ETHERSCAN_API_KEY
 
 URL_ETHERSCAN_API = 'https://api.etherscan.io/api?apikey=' + ETHERSCAN_API_KEY + '&module=proxy&action='
 
@@ -36,7 +36,7 @@ def get_etherscan_block_tip_number_hex():
     ACTION = 'eth_blockNumber'
     try:
         r = requests.get(URL_ETHERSCAN_API + ACTION)
-        blockNumber = json.loads(r.text)['result']   
+        blockNumber = json.loads(r.text)['result']
     except:
         print('api error')
         return False
@@ -47,7 +47,7 @@ def get_etherscan_block(blockNumber):
     ACTION = 'eth_getBlockByNumber&boolean=true&tag='
     try:
         r = requests.get(URL_ETHERSCAN_API + ACTION + blockNumber)
-        block = json.loads(r.text)['result']   
+        block = json.loads(r.text)['result']
     except:
         print('api error')
         return False
@@ -69,10 +69,10 @@ if __name__ == '__main__':
             else:
                 block = get_etherscan_block(hex(blockNumber - 1))
                 firstRun = False
-            
+
             search_block_for_receiver_addresses(block)
 
             lastBlockNumber = int(block['number'], 16)
             print(lastBlockNumber, block['hash'])
-        
+
         time.sleep(0.5)

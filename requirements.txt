@@ -1,5 +1,8 @@
-#pip install django twilio authy celery[redis] psycopg2-binary django-bootstrap4 django_forms_bootstrap
-
-#later:
-#gunicorn
-#whitenoise
+web3
+twilio
+celery[redis]
+psycopg2-binary
+django
+django-bootstrap4
+django_forms_bootstrap
+authy
