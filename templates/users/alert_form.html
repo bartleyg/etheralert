@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block title %}New alert{% endblock title %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+  <form class="col-sm-11 col-md-8 col-lg-6 col-xl-5" method="post">
+    {% csrf_token %}
+    {{ form|as_bootstrap }}
+    <div class="form-group">
+      <div class="row justify-content-center">
+        <a href="javascript:history.back()" class="col-auto btn btn-default">Cancel</a>
+        <button type="submit" class="col-auto btn btn-primary">
+          {% if not object.pk %}
+            Create alert
+          {% else %}
+            Update alert
+          {% endif %}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
+
+{% block page_css %}
+
+{% endblock %}
+
+{% block page_js %}
+
+{% endblock %}

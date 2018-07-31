@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ alert }}{% endblock title %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="page-header">
+        <h1>Alert</h1>
+      </div>
+
+      <dl class="dl-horizontal">
+        <dt><strong>Mobile number:</strong></dt>
+        <dd>{{ alert.phone_number }}</dd>
+        <dt><strong>Ethereum Address:</strong></dt>
+        <dd>{{ alert.address }}</dd>
+      </dl>
+
+      <a class="btn btn-default" href="{% url 'new_alert' %}">Back</a>
+      <a class="btn btn-default" href="{% url 'edit_alert' alert.id %}">Edit</a>
+      <a class="btn btn-danger" data-method="delete" href="{% url 'delete_alert' alert.id %}">Delete</a>
+    </div>
+  </div>
+{% endblock %}

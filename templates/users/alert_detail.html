@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Upcoming alerts{% endblock title %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-9">
+
+      <div class="page-header">
+        <h1>Alerts</h1>
+      </div>
+
+      {% if not Transaction.objects.filter %}
+        <p><strong>No historical alerts.</strong> Why not <a href="{% url 'new_alert' %}">create one?</a>
+      {% endif %}
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Mobile #</th>
+            <th>Ethereum Address</th>
+            <th>Text Count</th>
+            <th>Created</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for alert in object_list %}
+            <tr>
+              <td><a href="{{ alert.get_absolute_url }}">{{ alert.pk }}</a></td>
+              <td>{{ alert.phone_number }}</td>
+              <td>{{ alert.address }}</td>
+              <td>{{ alert.count }}</td>
+              <td>{{ alert.created }}</td>
+              <td>
+                <a class="btn btn-default btn-xs" href="{% url 'edit_alert' alert.pk %}">Edit</a>
+                <a class="btn btn-xs btn-danger" href="{% url 'delete_alert' alert.pk %}">Delete</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <a class="btn btn-primary" href="{% url 'new_alert' %}">New</a>
+    </div>
+  </div>
+{% endblock %}
